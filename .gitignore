@@ -1,0 +1,17 @@
+# Data stays local; only the .gitkeep placeholders are tracked
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Python / Jupyter
+.ipynb_checkpoints/
+__pycache__/
+
+# Secrets
+.env
+kaggle.json
+
+# Misc
+.DS_Store
+*.zip
