@@ -1,0 +1,35 @@
+# Conda environment for the CSC17104 final project (Gaming Profiles 2025)
+# Last update: 2026-11-01
+# Create:  conda env create -f environment.yml
+# Update:  conda env update -f environment.yml --prune
+# Solves on Windows (win-64), Linux (linux-64) and macOS 12+ (osx-64, osx-arm64)
+name: gaming-ds
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  # Core
+  - python=3.11.18
+  - pip=26.2.2
+
+  # Data science core
+  - numpy=2.4.6
+  - pandas=2.3.3
+  - pyarrow=26.0.0        # fast CSV reading, parquet files in data/processed/
+  - scipy=1.17.1
+
+  # Statistics & machine learning
+  - statsmodels=0.15.0    # regression with controls (D4), tests and confidence intervals (D5)
+  - scikit-learn=1.9.1
+
+  # Visualization
+  - matplotlib=3.11.2
+  - seaborn=0.13.2
+
+  # Jupyter
+  - jupyterlab=4.6.5
+  - ipykernel=7.4.0
+  - nbdime=4.0.4          # readable diffs and merges of .ipynb files in Git
+
+  # Data download
+  - kaggle=2.2.5          # Kaggle CLI used by scripts/download_data.sh

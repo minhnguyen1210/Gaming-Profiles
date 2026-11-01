@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Reject commit messages that credit an AI tool as author or co-author (see CONTRIBUTING.md).
+# Enable once per clone: git config core.hooksPath .githooks
+if grep -qiE '^co-authored-by:.*(claude|anthropic|openai|chatgpt|copilot|gemini)|noreply@anthropic\.com|generated with \[?claude' "$1"; then
+  echo "Commit rejected: AI attribution found in the commit message. Remove it and commit again." >&2
+  exit 1
+fi

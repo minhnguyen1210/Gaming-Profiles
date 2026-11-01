@@ -1,0 +1,35 @@
+# Data stays local: ignore everything under data/ except the folder placeholders.
+# The raw dataset is ~4 GB; GitHub rejects files over 100 MB.
+data/**
+!data/raw/
+!data/processed/
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Data files anywhere else in the repo (e.g. an accidental export next to a notebook)
+*.csv
+*.parquet
+*.feather
+*.pkl
+*.pickle
+*.h5
+*.zip
+
+# Python / Jupyter
+.ipynb_checkpoints/
+.virtual_documents/
+__pycache__/
+
+# Secrets
+.env
+kaggle.json
+access_token
+
+# Editors / local tool settings (each member configures these on their own machine)
+.vscode/
+.claude/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
