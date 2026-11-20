@@ -1,15 +1,16 @@
 # Câu hỏi nghiên cứu — đề xuất và bằng chứng
 
-> **Trạng thái: ĐỀ XUẤT, chưa chốt.** Nhóm thảo luận, kiểm chứng lại trong notebook 01 (Phase 2), sửa lời theo ý mình,
-> rồi mới chốt vào [`DECISIONS.md`](DECISIONS.md), bảng Questions trong [`README.md`](../README.md) và ma trận D1–D6
-> trong [`PROJECT_PLAN.md`](PROJECT_PLAN.md).
+> **Trạng thái: ĐỀ XUẤT, chưa chốt.** Nhóm làm xong notebook 01 (Phase 2) trước, kiểm chứng lại các số liệu ở đây, rồi mới
+> chọn 4 câu và người sở hữu ([`DECISIONS.md`](DECISIONS.md) #6). Khi chốt thì ghi vào `DECISIONS.md`, bảng Questions
+> trong [`README.md`](../README.md) và ma trận D1–D6 trong [`PROJECT_PLAN.md`](PROJECT_PLAN.md).
 >
-> **Nguồn gốc:** các câu hỏi được gợi ý khi brainstorm với Claude Code (ngày 2026-11-01) và đã ghi trong
-> [`LLM_USAGE.md`](../LLM_USAGE.md). Đề chỉ cho dùng AI như gia sư (mục 6): phần phân tích, kết luận và câu trả lời phải
-> do nhóm tự làm, và mỗi người phải giải thích được vì sao chọn câu của mình.
+> **Nguồn gốc:** bộ câu đầu tiên được gợi ý khi brainstorm với Claude Code (2026-11-01). Ngày 2026-11-20, Claude Code
+> rà soát lại bộ câu đó trên dữ liệu thật, thử thêm 6 hướng mới, rồi đề xuất bộ 4 câu dưới đây (thay câu Q2 cũ, sửa
+> Q1, Q3, Q4). Cả hai lần phải ghi trong [`LLM_USAGE.md`](../LLM_USAGE.md). Đề chỉ cho dùng AI như gia sư (mục 6): phần
+> phân tích, kết luận và câu trả lời phải do nhóm tự làm, và mỗi người phải giải thích được vì sao chọn câu của mình.
 >
-> **Về số liệu trong file này:** đo trên dataset phiên bản 1 ngày 2026-11-01, chỉ để chứng minh **dữ liệu đủ để trả lời**
-> và chỉ ra **rủi ro phải xử lý**. Đây **không phải** kết quả phân tích; nhóm phải tự đo lại trong notebook.
+> **Về số liệu trong file này:** đo trên dataset phiên bản 1 (ngày 2026-11-01 và 2026-11-20), chỉ để chứng minh **dữ liệu
+> đủ để trả lời** và chỉ ra **rủi ro phải xử lý**. Đây **không phải** kết quả phân tích; nhóm phải tự đo lại trong notebook.
 
 ## 1. Tổng quan
 
@@ -20,15 +21,14 @@ Nhóm 2 người → **đúng 4 câu**: **3 câu non-ML + 1 câu ML** (đề, m�
 - Không làm nhiều hơn 4: đề yêu cầu đúng 2 × n câu, làm thêm không cộng điểm, và 15 phút thuyết trình chỉ đủ khoảng
   3,5 phút cho mỗi câu. Điểm cao đến từ **độ sâu** của từng câu.
 - Chỉ 1 câu ML: câu ML tốn công nhất (6 yêu cầu bắt buộc); 3 câu non-ML giúp phủ đủ cả 6 tiêu chí D.
-- 4 câu phủ 4 mảng khác nhau của dataset: **giá theo thời gian**, **giá giữa các nền tảng**, **hành vi người chơi**, **review**.
+- 4 câu phủ 4 mảng khác nhau của dataset: **giá theo thời gian**, **thiết kế thành tựu**, **hành vi người chơi**, **review**.
 
-| Câu | Loại | Chủ đề | Notebook | Người sở hữu |
-| --- | --- | --- | --- | --- |
-| Q1 | non-ML | Đợt sale của Steam: giảm sâu tới đâu, ở đâu, giá có về lại không | `02_analysis_q1.ipynb` | TODO |
-| Q2 | non-ML | Cùng một game: console đắt hơn PC bao nhiêu | `02_analysis_q2.ipynb` | TODO |
-| Q3 | non-ML | Người chơi bỏ game nhanh tới mức nào sau thành tựu đầu tiên | `02_analysis_q3.ipynb` | TODO |
-| Q4 | ML | Dự đoán review Steam có được bình chọn "helpful" không | `03_ml_question.ipynb` | TODO |
-| Q4' | ML (dự phòng) | Dự đoán người chơi PlayStation có đạt Platinum không | `03_ml_question.ipynb` | — |
+| Câu | Loại | Chủ đề | Dữ liệu chính | Notebook | Người sở hữu |
+| --- | --- | --- | --- | --- | --- |
+| Q1 | non-ML | Đợt sale Steam: giảm sâu tới đâu, sau sale giá có tăng lên không | Steam `prices`, `games` | `02_analysis_q1.ipynb` | TODO |
+| Q2 | non-ML | Hạng trophy PlayStation có phản ánh độ khó thật không | PS `history`, `achievements` | `02_analysis_q2.ipynb` | TODO |
+| Q3 | non-ML | Sau thành tựu đầu tiên, người chơi có quay lại game không | `history`, `achievements` cả 3 nền tảng | `02_analysis_q3.ipynb` | TODO |
+| Q4 | ML | Dự đoán review Steam có được bình chọn "helpful" không | Steam `reviews`, `players`, `games` | `03_ml_question.ipynb` | TODO |
 
 ### 1.2 Ma trận tiêu chí độ sâu (dự kiến)
 
@@ -36,249 +36,300 @@ Nhóm 2 người → **đúng 4 câu**: **3 câu non-ML + 1 câu ML** (đề, m�
 
 | | D1 Ghép dữ liệu | D2 Reshape & thời gian | D3 Biến phái sinh | D4 Kiểm soát nhiễu | D5 Độ bất định | D6 Độ vững |
 | --- | --- | --- | --- | --- | --- | --- |
-| Q1 | ✅ prices ↔ games | ✅ trước / trong / sau sale | ✅ % giảm giá | ✅ tuổi game, mức giá gốc | ✅ bootstrap CI | ✅ hai đợt sale, hai cách tính giá nền |
-| Q2 | ✅ 3 nền tảng | | ✅ tỉ lệ giá console/PC | ✅ năm phát hành, thể loại, mức giá | ✅ kiểm định theo cặp | ✅ hai cách khớp tên, hai ngày giá |
-| Q3 | ✅ history ↔ achievements ↔ games | ✅ cohort, đường giữ chân theo ngày | ✅ "còn hoạt động sau N ngày" | ✅ số thành tựu của game, thể loại | ✅ CI cho tỉ lệ giữ chân | ✅ có/không loại dữ liệu nghi hack |
+| Q1 | ✅ prices ↔ games | ✅ trước / trong / sau sale | ✅ giá nền, % giảm | ✅ tuổi game, mức giá gốc | ✅ bootstrap CI | ✅ hai cách tính giá nền, ngưỡng "đang sale" |
+| Q2 | ✅ history ↔ achievements ↔ games | | ✅ tỉ lệ mở thực tế | ✅ so trong từng game (nghịch lý Simpson) | ✅ bootstrap theo game | ✅ đổi ngưỡng số người tối thiểu mỗi game |
+| Q3 | ✅ history ↔ achievements | ✅ cohort theo quý (tuỳ chọn) | ✅ "quay lại sau N ngày" | ✅ số thành tựu của game | ✅ bootstrap theo người chơi | ✅ đổi mốc N; loại cặp mở hàng loạt |
 | **Phủ** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-### 1.3 Gợi ý phân công
+### 1.3 Độ khó và gợi ý phân công
+
+Ước lượng công sức rất thô, chỉ để so sánh tương đối giữa các câu.
+
+| Câu | Độ khó | Công sức ước lượng | Phần khó nhất |
+| --- | --- | --- | --- |
+| Q1 | dễ nhất | 15–20 giờ | định nghĩa đợt sale và giá nền |
+| Q2 | vừa | 20–25 giờ | giải thích nghịch lý Simpson khi thuyết trình và Q&A |
+| Q3 | khó | 25–30 giờ | dữ liệu nặng (khoảng 45 triệu dòng), định nghĩa chỉ số, censoring |
+| Q4 | khó nhất | 30–35 giờ | đủ 6 yêu cầu ML, chống leakage, scikit-learn chưa học trên lớp |
 
 | Phương án | Thành viên A | Thành viên B | Ghi chú |
 | --- | --- | --- | --- |
-| Cân bằng khối lượng | Q1 + Q4 | Q2 + Q3 | A dùng dữ liệu Steam; B dùng dữ liệu 3 nền tảng |
-| Theo chủ đề | Q1 + Q2 ("Giá") | Q3 + Q4 ("Người chơi") | dễ kể chuyện khi thuyết trình, nhưng phần B nặng hơn |
+| **Cân bằng khối lượng (khuyên dùng)** | Q1 + Q4 | Q2 + Q3 | mỗi người một câu vừa + một câu nặng; Q2 và Q3 cùng dùng `history` |
+| Theo nhóm bảng khám phá | Q1 + Q2 | Q3 + Q4 | B giữ cả hai câu nặng nhất → **lệch** |
+
+Notebook 01 chia theo nhóm bảng như PR #1 (A phía game, B phía người chơi; [`DECISIONS.md`](DECISIONS.md) #6):
+khám phá xong toàn bộ dữ liệu rồi mới chọn câu hỏi.
+
+### 1.4 Phạm vi kỹ thuật
+
+Mọi câu non-ML làm được hoàn toàn bằng kiến thức đã học trên lớp: Pandas (`merge`, `groupby`, `pivot`, `explode`,
+datetime), Regex (tách nhãn thể loại, đếm từ), NumPy (bootstrap bằng `np.random.default_rng(RANDOM_STATE)`), Matplotlib.
+
+- **Không dùng** kiểm định của scipy, hồi quy của statsmodels, hay TF-IDF: chưa học, và không cần để đạt tiêu chí.
+  Độ bất định (D5) tính bằng bootstrap với NumPy.
+- **scikit-learn chưa học** nhưng đề **bắt buộc** cho câu ML (`Pipeline`, cross-validation). Người giữ Q4 cần học sớm;
+  hỏi lại giảng viên xem môn có dạy ở các buổi sau không.
+- Ba khái niệm cần hiểu để trả lời Q&A: **censoring** (Q3), **nghịch lý Simpson** (Q2), **data leakage** (Q4).
 
 ## 2. Dữ liệu nói gì (bằng chứng chung)
 
 | Bảng | Steam | PlayStation | Xbox | Điểm quan trọng |
 | --- | --- | --- | --- | --- |
-| `games` | 98.248 | 23.151 | 10.489 | PS có 11.974 dòng trùng tên (cùng game, nhiều bản PS4/PS5/Vita); Steam có 3 game tên rỗng |
-| `achievements` | 1.939.027 | 846.563 | 351.111 | PS: 219.605 thành tựu thuộc game **không có** trong `games`; bảng PS có ô nhiều dòng (engine `pyarrow` đọc lỗi) |
-| `history` | 10.693.879 | 19.510.083 | 15.275.900 | chỉ khoảng **5.000 người chơi** mỗi nền tảng; 2008-09 → 12/2024 |
-| `players` | 424.683 | 356.600 | 274.450 | phần lớn **không** có lịch sử; Steam thiếu `country` 42%, Xbox không có `country` |
-| `prices` | 4.414.273 (45 ngày) | 62.816 (3 ngày) | 22.638 (2 ngày) | chỉ Steam có chuỗi thời gian; ngày chung của cả 3: 22–24/02/2025 |
-| `purchased_games` | 102.548 | 46.582 | 46.466 | thư viện game của người chơi (không dùng trong 4 câu) |
-| `reviews` | 1.204.534 | — | — | 10/2010 → 01/2025, phần lớn từ 2017; `helpful` lệch mạnh (trung vị 0) |
-| `friends`, `private_steamids` | 424.683 / 227.963 | — | — | không dùng: mạng bạn bè chỉ có ở Steam, không phục vụ câu hỏi nào có ích cho cả 3 nền tảng |
+| `games` | 98.248 | 23.151 | 10.489 | không thiếu `release_date`; Steam có 5.294 tên chứa "Playtest"; PS có nhiều dòng cùng tên (bản PS3/PS4/PS5/Vita) |
+| `achievements` | 1.939.027 | 846.563 | 351.111 | PS có cột `rarity` (Bronze/Silver/Gold/Platinum), Xbox có cột `points`; bảng PS có ô nhiều dòng (engine `pyarrow` đọc lỗi) |
+| `history` | 10.693.879 | 19.510.083 | 15.275.900 | chỉ 4.838 / 5.000 / 4.984 người chơi; 2008-09 → 12/2024 |
+| `players` | 424.683 | 356.600 | 274.450 | phần lớn **không** có lịch sử; Steam thiếu `country` 41,9%; Xbox không có `country` |
+| `prices` | 4.414.273 (45 ngày) | 62.816 (3 ngày) | 22.638 (2 ngày) | chỉ Steam có chuỗi thời gian |
+| `purchased_games` | 102.548 | 46.582 | 46.466 | Steam: 54,2% thư viện là ô rỗng (không công khai) |
+| `reviews` | 1.204.534 | — | — | 10/2010 → 01/2025; không có cột "đề xuất / không đề xuất" |
+| `friends`, `private_steamids` | 424.683 / 227.963 | — | — | không dùng trong 4 câu |
 
 **Thiên lệch chọn mẫu:** người chơi trong `history` lấy từ bảng xếp hạng Exophase, phần lớn là người "săn thành tựu".
-Mọi kết luận về hành vi chỉ đúng cho nhóm này, phải nêu trong phần hạn chế.
+Mọi kết luận về hành vi (Q2, Q3) chỉ đúng cho nhóm này, phải nêu trong phần hạn chế.
 
 ---
 
-## 3. Q1 — Đợt sale của Steam (non-ML)
+## 3. Q1 — Đợt sale Steam: giảm sâu tới đâu, sau sale giá có tăng lên không? (non-ML)
 
-**Câu hỏi (nháp):** Trong các đợt sale lớn của Steam từ 11/2024 đến 02/2025, game được giảm giá sâu tới mức nào? Thể loại và
-mức giá nào được giảm mạnh nhất khi đã tính đến tuổi của game? Sau đợt sale, giá có trở về đúng mức cũ không?
+**Câu hỏi (nháp):** Trong đợt sale cuối năm 2024 của Steam, game được giảm giá sâu tới mức nào, và mức giảm khác nhau thế nào
+theo tuổi game và mức giá gốc? Sau khi sale kết thúc, bao nhiêu game quay về đúng giá cũ, bao nhiêu game **tăng giá**?
 
-> *English draft:* During Steam's major sales between Nov 2024 and Feb 2025, how deep were the discounts, which genres and
-> price tiers were discounted most once game age is accounted for, and did prices return to their pre-sale level afterwards?
+> *English draft:* During Steam's 2024 winter sale, how deep were the discounts and how did they vary with game age and
+> original price tier? After the sale, what share of games returned to their pre-sale price, and what share became more
+> expensive?
 
 **Ai quan tâm, quyết định gì:**
-- Người mua: có nên chờ sale không, chờ được bao nhiêu.
-- Nhà phát triển indie: nên giảm bao nhiêu % để không bị lép vế so với game cùng thể loại, cùng tuổi.
+- Người mua: có nên chờ sale không; mua ngay sau sale có bị đắt hơn trước không.
+- Nhà phát triển: nên giảm bao nhiêu % so với game cùng tuổi, cùng mức giá.
 
 **Bằng chứng từ dataset:**
-- `steam/prices`: 45 ngày, cứ 2 ngày một lần, từ 28/11/2024 đến 24/02/2025; mỗi ngày 97.659–98.465 game; không có dòng
-  trùng `(gameid, ngày)`. 77.495 game có giá USD dương ở **đủ 45 ngày**.
-- Tỉ lệ game có giá thấp hơn giá cao nhất của chính nó trong giai đoạn (dấu hiệu đang giảm giá):
+- `steam/prices`: 45 ngày, cứ 2 ngày một lần, 28/11/2024 → 24/02/2025; không có dòng trùng `(gameid, ngày)`.
+  77.495 game có giá USD dương ở **đủ 45 ngày**; 20.049 game không có giá USD ở ngày nào (miễn phí hoặc không bán).
+- Tỉ lệ game có giá thấp hơn giá cao nhất của chính nó trong giai đoạn:
 
   | Giai đoạn | Tỉ lệ |
   | --- | --- |
-  | 28/11 → 04/12/2024 | 59–60% |
+  | 28/11 → 04/12/2024 | 60% (đợt sale thứ nhất, **không có** giai đoạn "trước sale") |
   | 06/12 → 18/12/2024 | 7–13% |
-  | **20/12/2024 → 01/01/2025** | **61–62%** |
+  | **20/12/2024 → 01/01/2025** | **61–62%** (đợt sale cuối năm) |
   | 03/01 → 24/02/2025 | 3–14% |
 
-  → Dữ liệu tự cho thấy **hai đợt sale lớn** (cuối tháng 11 và cuối tháng 12), không cần dựa vào lịch Steam.
-- 20.049 game **không có giá USD ở bất kỳ ngày nào** (game miễn phí hoặc không bán) → loại, báo số dòng.
-- 217 `gameid` có giá nhưng không có trong `games` → báo khi merge (D1).
-- `genres` là danh sách dạng chuỗi (`"['Action', 'Indie']"`), 33 nhãn; thiếu 5,6% → cần tách nhãn (`explode`), một game
-  thuộc nhiều thể loại.
+- **Dấu hiệu tăng giá sau sale:** tỉ lệ game có giá **cao hơn** giá trung vị của chính nó là 0,1–2,4% trước 03/01 nhưng
+  khoảng **5%** từ 03/01. So giá ngày 18/12 (trước sale) với ngày 24/02: 83,8% giữ nguyên, **7,7% tăng**, 8,4% giảm.
+- 24.976 / 77.495 game (32%) không đổi giá lần nào trong 45 ngày → phải nói rõ có tính vào mẫu số hay không.
+- 217 `gameid` có giá nhưng không có trong `games` → báo khi merge (D1). Trong các game giữ lại: thiếu `genres` 0,1%,
+  không thiếu `release_date`; `genres` là chuỗi dạng danh sách, 33 nhãn → tách bằng regex rồi `explode`.
 
 **Quy trình phân tích:**
-1. **Làm sạch:** loại game không có giá USD; chỉ giữ game có giá ở đủ 45 ngày (hoặc nêu rõ quy tắc khác). In số dòng.
+1. **Làm sạch:** chỉ giữ game có giá USD dương ở đủ 45 ngày; in số dòng.
 2. **Ghép** `prices` ↔ `games` lấy thể loại và ngày phát hành; báo số `gameid` không khớp (D1).
-3. **Xác định đợt sale từ dữ liệu:** vẽ tỉ lệ game đang giảm theo ngày, chốt khoảng ngày của mỗi đợt (D2).
-4. **Giá nền mỗi game:** trung vị giá ở các ngày ngoài sale. **% giảm** = 1 − giá / giá nền (D3).
-5. **Gán giai đoạn** trước / trong / sau từng đợt sale; so sánh % giảm và tỉ lệ game được giảm (D2).
-6. **Kiểm soát nhiễu:** so sánh thể loại **trong từng nhóm** tuổi game (năm từ ngày phát hành) và mức giá gốc (D4).
-7. **Độ bất định:** bootstrap khoảng tin cậy 95% cho % giảm trung vị của từng thể loại; kiểm định khác biệt kèm effect size (D5).
-8. **"Giá có về lại không":** tỉ lệ game sau sale có giá bằng, cao hơn hay thấp hơn giá nền. Có thể kiểm tra thêm game nào
-   **tăng giá ngay trước sale** (giảm giá "ảo").
-9. **Độ vững:** lặp lại kết luận cho **đợt sale thứ hai**; đổi định nghĩa giá nền (trung vị ↔ giá cao nhất) (D6).
+3. **Xác định đợt sale từ dữ liệu:** vẽ tỉ lệ game đang giảm giá theo ngày; chốt ngưỡng (ví dụ > 30% game đang giảm) (D2).
+4. **Giá nền** mỗi game: trung vị giá ở các ngày ngoài sale. **% giảm** = 1 − giá / giá nền (D3).
+5. **Trước / trong / sau** đợt sale cuối năm: so sánh % giảm và tỉ lệ game được giảm (D2).
+6. **Kiểm soát nhiễu:** so sánh trong từng nhóm tuổi game (năm kể từ ngày phát hành) và mức giá gốc (D4).
+7. **Độ bất định:** bootstrap khoảng tin cậy 95% bằng NumPy cho % giảm trung vị và cho tỉ lệ game tăng giá (D5).
+8. **"Giá có về lại không":** tỉ lệ game sau sale có giá bằng, cao hơn, thấp hơn giá trước sale; xem tay vài ví dụ tăng giá.
+9. **Độ vững:** đổi định nghĩa giá nền (trung vị ↔ giá cao nhất ngoài sale); đổi ngưỡng "đang sale" (D6).
 
-**Biểu đồ gợi ý (≥ 2):** đường tỉ lệ game giảm giá theo ngày, tô màu các đợt sale · biểu đồ khoảng tin cậy % giảm theo thể loại,
-tách theo tuổi game · heatmap thể loại × mức giá gốc.
+**Biểu đồ gợi ý (≥ 2):** đường tỉ lệ game đang giảm giá theo ngày, tô màu đợt sale · % giảm theo tuổi game × mức giá
+(heatmap) · cột tỉ lệ game giữ giá / tăng / giảm sau sale, kèm khoảng tin cậy.
 
 **Rủi ro và cách xử lý:**
-- Dữ liệu bắt đầu ngày 28/11, **giữa** đợt sale đầu → đợt đầu không có "trước sale"; đợt thứ hai đủ cả trước/trong/sau.
-- Giá USD là giá cửa hàng Mỹ, không đại diện cho mọi khu vực.
+- Đợt sale thứ nhất không có giai đoạn trước sale → chỉ phân tích sâu đợt cuối năm; không dùng đợt thứ nhất làm D6.
+- Câu "thể loại nào giảm sâu nhất" dễ chỉ là một `groupby` → chiều sâu phải nằm ở D4 và ở phần tăng giá sau sale.
+- Giá USD là giá cửa hàng Mỹ, không đại diện mọi khu vực.
+
+**Giảm tải nếu cần:** bỏ phân tích theo thể loại, chỉ giữ tuổi game và mức giá; vẫn đủ ≥ 4 tiêu chí.
 
 **Khác với phân tích đã có:** tác giả chỉ dùng giá trung bình để tính ARPU/LTV, không phân tích diễn biến giá theo thời gian.
 
 ---
 
-## 4. Q2 — Console có đắt hơn PC không? (non-ML)
+## 4. Q2 — Hạng trophy PlayStation có phản ánh độ khó thật không? (non-ML)
 
-**Câu hỏi (nháp):** Với cùng một game bán trên Steam, PlayStation và Xbox, bản console đắt hơn hay rẻ hơn bản PC bao nhiêu?
-Chênh lệch đó có thay đổi theo tuổi game, thể loại và mức giá không?
+**Câu hỏi (nháp):** Trophy Bronze, Silver, Gold trên PlayStation có thật sự khó dần, đo bằng tỉ lệ người chơi mở được?
+Vì sao khi gộp mọi game lại, trophy Gold trông còn **dễ** hơn Bronze?
 
-> *English draft:* For the same game sold on Steam, PlayStation and Xbox, how much more (or less) does the console version
-> cost than the PC version, and does the gap depend on game age, genre and price tier?
+> *English draft:* Do PlayStation trophy grades (Bronze, Silver, Gold) reflect how hard trophies really are, measured by the
+> share of players who unlock them, and why do Gold trophies look easier than Bronze ones when all games are pooled?
 
 **Ai quan tâm, quyết định gì:**
-- Người chơi chọn mua game trên nền tảng nào.
-- Nhà phát hành định giá khi đưa game lên nhiều nền tảng.
+- Nhà phát triển: gán hạng trophy có khớp với độ khó thật không.
+- Người săn thành tựu: hạng trophy có dùng được để ước lượng công sức không.
 
 **Bằng chứng từ dataset:**
-- Ngày **22/02/2025** là ngày đầu tiên cả 3 nền tảng đều có giá. Hôm đó Steam **không** trong đợt sale (8,9% game giảm,
-  bằng mức bình thường) → so sánh công bằng.
-- Số game có giá USD ngày 22/02/2025: Steam 77.872 · PlayStation 20.193 · Xbox 7.920.
-- Số game khớp tên giữa các nền tảng (có giá ngày đó):
+- `history` PS ghép `achievements` khớp **100%**; chỉ cần gom **một lần** về bảng mức trophy (khoảng 160 nghìn dòng)
+  rồi lưu vào `data/processed/`.
+- Tỉ lệ mở = số người mở trophy / số người có ít nhất 1 trophy trong game đó. Với các game có ≥ 30 người chơi
+  (4.439 game; 101.385 Bronze, 37.769 Silver, 18.679 Gold, 3.638 Platinum), **tỉ lệ mở trung vị**:
 
-  | Cách khớp | Steam & PS | Steam & Xbox | Cả 3 |
+  | Bronze | Silver | Gold | Platinum |
   | --- | --- | --- | --- |
-  | Tên giữ nguyên (chữ thường) | 5.133 | 5.020 | 3.454 |
-  | Tên chuẩn hoá (bỏ ™ ® ©, dấu câu) | 5.591 | 5.425 | 3.787 |
+  | 45,9% | 37,5% | **50,0%** | 26,3% |
 
-- PlayStation có **11.974 dòng trùng tên** (ví dụ `#KILLALLZOMBIES` có bản PS3, PS4, PS Vita) → phải gộp về một giá
-  mỗi tên game theo quy tắc rõ ràng. Steam có 838, Xbox có 944 tên trùng.
-- 2,7–5,2% tên game có chữ "Edition", "Deluxe", "Bundle"… → dễ khớp nhầm phiên bản khác nhau.
+- **Nhưng trong từng game** (3.843 game có cả Bronze và Gold): trung bình chỉ **16,5%** trophy Bronze khó hơn trophy Gold
+  trung vị của cùng game → khi so trong cùng game, Gold khó hơn. Đây là dấu hiệu **nghịch lý Simpson**: kết quả gộp bị
+  thành phần game làm méo.
+- Số ngày trung vị từ trophy đầu tiên tới khi mở: Gold **0** ngày, Bronze 2, Silver 4, Platinum 5 → nhiều trophy Gold
+  được mở ngay ngày đầu (game "Platinum dễ"?). Cần kiểm chứng.
 
 **Quy trình phân tích:**
-1. **Chuẩn hoá tên** và **gộp tên trùng** trong từng nền tảng (ví dụ: lấy giá thấp nhất, hoặc ưu tiên bản PS5); in số dòng.
-2. **Ghép 3 nền tảng** theo tên chuẩn hoá; báo số game khớp, không khớp ở từng cặp (D1).
-3. **Biến phái sinh:** `log(giá console / giá Steam)` cho PS và Xbox (D3); lấy log để chênh lệch đối xứng.
-4. **So sánh theo cặp:** Wilcoxon signed-rank hoặc bootstrap khoảng tin cậy cho trung vị tỉ lệ; báo effect size (D5).
-5. **Kiểm soát nhiễu:** so sánh chênh lệch trong từng nhóm năm phát hành, thể loại, mức giá Steam (D4).
-6. **Độ vững:** khớp tên chính xác ↔ chuẩn hoá; có/không loại tên chứa "Edition/Bundle"; dùng giá ngày 24/02 thay cho 22/02 (D6).
+1. **Ghép** `history` → `achievements` (lấy `gameid`, `rarity`) → `games` (năm phát hành, PS4/PS5); báo số dòng và key
+   không khớp (D1). 5.969 / 23.025 game đã chơi không có trong `games` → chỉ ảnh hưởng nếu dùng thông tin từ `games`.
+2. **Gom** về mức trophy: số người mở; về mức game: số người chơi. Lưu vào `data/processed/`.
+3. **Biến phái sinh:** tỉ lệ mở thực tế; số ngày từ trophy đầu tiên của người chơi tới khi mở (D3).
+4. **So sánh gộp:** tỉ lệ mở theo hạng trên toàn bộ trophy.
+5. **So sánh trong từng game (D4):** với mỗi game, so trung vị tỉ lệ mở của Gold với Bronze; tính % game mà Gold khó hơn
+   Bronze. Giải thích vì sao kết quả gộp khác (ví dụ: game có nhiều Gold và rất dễ chiếm tỉ trọng lớn).
+6. **Độ bất định:** bootstrap **theo game** bằng NumPy cho % game mà Gold khó hơn Bronze (D5).
+7. **Độ vững:** đổi ngưỡng số người tối thiểu mỗi game (30 ↔ 100); tách riêng PS4 và PS5 (D6).
 
-**Biểu đồ gợi ý (≥ 2):** scatter giá Steam vs giá console (trục log, có đường y = x) · phân phối log-tỉ lệ cho PS và Xbox ·
-log-tỉ lệ theo năm phát hành.
+**Biểu đồ gợi ý (≥ 2):** boxplot tỉ lệ mở theo hạng (gộp) đặt cạnh boxplot chênh lệch Gold − Bronze trong từng game ·
+scatter mỗi game: tỉ lệ Gold trong game × tỉ lệ mở trung bình, để minh hoạ nghịch lý Simpson.
 
 **Rủi ro và cách xử lý:**
-- Khớp theo tên có thể sai (cùng tên khác game, hoặc khác phiên bản) → kiểm tra bằng tay một mẫu ngẫu nhiên và báo tỉ lệ sai.
-- Không biết game console có đang giảm giá ngày đó không (chỉ có 2–3 ngày giá) → nêu trong hạn chế; so sánh 22/02 và 24/02.
-- Năm phát hành và thể loại lấy từ bảng Steam để thống nhất giữa 3 nền tảng.
+- Mẫu số "người đã bắt đầu game" là lựa chọn chủ quan → nêu rõ định nghĩa.
+- Platinum tự mở khi có đủ trophy khác → phân tích riêng hoặc loại khỏi so sánh chính.
+- Mẫu là người săn thành tựu → "độ khó" là độ khó với nhóm này.
+- Phải hiểu và giải thích bằng lời được nghịch lý Simpson (Q&A chắc chắn hỏi).
 
-**Khác với phân tích đã có:** tác giả không so sánh giá giữa các nền tảng.
+**Giảm tải nếu cần:** chỉ làm PlayStation; mở rộng sang điểm `points` của Xbox để làm sau nếu còn thời gian.
+
+**Khác với phân tích đã có:** tác giả đo tỉ lệ hoàn thành game và phát hiện gian lận thành tựu, không đối chiếu hạng trophy
+với độ khó thực tế.
 
 ---
 
-## 5. Q3 — Người chơi bỏ game nhanh tới mức nào? (non-ML)
+## 5. Q3 — Sau thành tựu đầu tiên, người chơi có quay lại game không? (non-ML)
 
-**Câu hỏi (nháp):** Sau thành tựu đầu tiên trong một game, bao nhiêu % người chơi vẫn còn mở thành tựu mới sau 7, 30 và 90 ngày?
-Mức giữ chân này khác nhau thế nào giữa Steam, PlayStation, Xbox và giữa các thể loại, khi đã tính đến số thành tựu của game?
+**Câu hỏi (nháp):** Sau thành tựu đầu tiên trong một game, bao nhiêu % người chơi **quay lại** mở thêm thành tựu sau 30 ngày?
+Tỉ lệ này khác nhau thế nào giữa Steam, PlayStation và Xbox khi so trong cùng nhóm số thành tựu của game?
 
-> *English draft:* After a player's first achievement in a game, what share of players still unlock new achievements 7, 30
-> and 90 days later, and how does this retention differ across Steam, PlayStation and Xbox and across genres once the number
-> of achievements in the game is accounted for?
+> *English draft:* After a player's first achievement in a game, what share of players come back and unlock another
+> achievement more than 30 days later, and how does this differ across Steam, PlayStation and Xbox once the number of
+> achievements in the game is accounted for?
 
 **Ai quan tâm, quyết định gì:**
-- Nhà phát triển: nội dung và thành tựu nên rải tới mốc nào để giữ người chơi.
-- Nền tảng: thời điểm nào nên gửi thông báo, gợi ý để kéo người chơi quay lại.
+- Nhà phát triển: nội dung và thành tựu nên rải tới mốc nào để người chơi quay lại.
+- Nền tảng: thời điểm nào nên nhắc người chơi quay lại game.
+
+**Định nghĩa (phải ghi rõ trong notebook):** một cặp (người chơi, game) "quay lại sau N ngày" nếu có thành tựu mở **sau**
+ngày đầu tiên + N ngày. Đây là "**từng quay lại**" (kể cả quay lại sau nhiều năm), **không** phải "chơi liên tục".
 
 **Bằng chứng từ dataset:**
-- `history` ghép với `achievements` khớp **100%** ở cả 3 nền tảng; không có dòng trùng `(người chơi, thành tựu)`.
-- Số cặp (người chơi, game): Steam 276.036 · PS 995.079 · Xbox 1.010.783; mỗi năm 2019–2024 có 22–95 nghìn cặp mới
-  mỗi nền tảng → đủ lớn cho phân tích cohort.
-- Game đã chơi **không có** trong bảng `games` (mất thể loại): Steam 58 · Xbox 742 · **PS 5.969** (≈ 26% game đã chơi) → phải báo (D1)
-  và phân tích thể loại trên phần khớp được.
-- **Dấu hiệu hack/đồng bộ hàng loạt:** tỉ lệ lượt mở thành tựu trùng đúng một giây với ≥ 5 thành tựu khác của cùng người chơi:
-  **Steam 55,3%** · PS 1,5% · Xbox 1,3% → bắt buộc kiểm tra độ vững.
-- Dữ liệu kết thúc 15/12 (Steam), 29/12 (PS), 24/12/2024 (Xbox); 6–13 nghìn cặp bắt đầu trong 90 ngày cuối → chưa đủ thời gian
-  quan sát, phải loại khi tính mốc 90 ngày.
-- Ngày sớm nhất của cả 3 nền tảng đều là 12–13/09/2008 (PS 116 dòng, Xbox 982 dòng ngày đó) → nghi là ngày mặc định khi thiếu
-  ngày thật; kiểm tra trong notebook 01.
+- `history` ghép `achievements` khớp **100%** ở cả 3 nền tảng.
+- Số cặp (người chơi, game): Steam 276.036 · PS 995.079 · Xbox 1.010.783; mỗi năm 2019–2024 có 22–95 nghìn cặp mới mỗi nền tảng.
+- Tỉ lệ thô "quay lại sau N ngày":
+
+  | | 7 ngày | 30 ngày | 90 ngày |
+  | --- | --- | --- | --- |
+  | Steam | 46% | 36% | 31% |
+  | PlayStation | 48% | 32% | 24% |
+  | Xbox | 46% | 34% | 27% |
+
+- Cặp đã mở **hết** thành tựu của game: Steam 10,7% · PS 26,3% · Xbox 16,1%; cặp chỉ có **1** thành tựu: 9,5–13,5%.
+- Mở hàng loạt (≥ 5 thành tựu trong cùng một giây): Steam 55,3% số lượt mở, nhưng tập trung trong chỉ 7,2% số cặp; loại các
+  cặp này thì tỉ lệ thay đổi < 1 điểm % → D6 sẽ cho kết luận "vững".
+- Mỗi người chơi có rất nhiều cặp (trung vị Steam 29, PS 129, Xbox 121) → các cặp không độc lập, phải bootstrap theo người chơi.
+- Dữ liệu kết thúc 15/12 (Steam), 29/12 (PS), 24/12/2024 (Xbox) → cặp bắt đầu sát cuối chưa đủ thời gian quan sát (censoring).
 
 **Quy trình phân tích:**
-1. **Ghép** `history` → `achievements` (lấy `gameid`) → `games` (thể loại); báo số dòng và key không khớp (D1).
-2. **Gom về mức (người chơi, game):** ngày mở đầu tiên, ngày mở cuối cùng, số thành tựu đã mở. Lưu bảng này vào
-   `data/processed/` vì `history` rất nặng.
-3. **Biến phái sinh:** `active_after_N` = có mở thành tựu nào sau ngày đầu tiên + N ngày (N = 7, 30, 90) (D3).
-4. **Xử lý censoring:** chỉ giữ cặp bắt đầu sớm hơn ngày cuối của dữ liệu ít nhất N ngày; in số dòng mỗi lần lọc.
-5. **Đường giữ chân và cohort:** tỉ lệ còn hoạt động theo số ngày; bảng cohort theo quý bắt đầu chơi (D2).
-6. **Kiểm soát nhiễu:** so sánh nền tảng và thể loại **trong từng nhóm** số thành tựu của game (game ít và nhiều thành tựu khác nhau tự nhiên) (D4).
-7. **Độ bất định:** khoảng tin cậy cho tỉ lệ giữ chân; bootstrap theo **người chơi**, vì một người có nhiều cặp (D5).
-8. **Độ vững:** chạy lại sau khi loại các cặp có dấu hiệu mở hàng loạt cùng một giây; đổi mốc N; giới hạn 2019–2024 (D6).
+1. **Ghép** `history` → `achievements` (lấy `gameid`); báo số dòng và key không khớp (D1). Đọc **từng nền tảng một**.
+2. **Gom về mức (người chơi, game):** ngày mở đầu tiên, ngày mở cuối cùng, số thành tựu đã mở, tổng số thành tựu của game.
+   Lưu vào `data/processed/` vì `history` rất nặng.
+3. **Biến phái sinh:** `returned_N` (D3).
+4. **Lọc:** chỉ giữ cặp bắt đầu trong 2019–2024; bỏ cặp bắt đầu ít hơn N ngày trước ngày cuối của dữ liệu (censoring);
+   tách riêng cặp đã mở hết hoặc chỉ có 1 thành tựu. In số dòng mỗi lần lọc.
+5. **So sánh 3 nền tảng trong từng nhóm số thành tựu của game** (ví dụ ≤ 20, 21–50, > 50) (D4).
+6. **Độ bất định:** bootstrap **theo người chơi** bằng NumPy: gom tổng theo người trước, rồi lấy mẫu lại danh sách người (D5).
+7. **Độ vững:** đổi mốc N (7 / 90 ngày); loại cặp mở hàng loạt (D6). Tuỳ chọn: bảng cohort theo quý bắt đầu (D2).
 
-**Biểu đồ gợi ý (≥ 2):** đường giữ chân của 3 nền tảng (trục x: ngày kể từ thành tựu đầu) · heatmap cohort × mốc ngày ·
-tỉ lệ còn hoạt động sau 30 ngày theo thể loại, tách theo nhóm số thành tựu.
+**Biểu đồ gợi ý (≥ 2):** đường tỉ lệ quay lại theo số ngày kể từ thành tựu đầu của 3 nền tảng · cột tỉ lệ quay lại sau 30
+ngày theo nhóm số thành tựu × nền tảng, kèm khoảng tin cậy.
 
 **Rủi ro và cách xử lý:**
-- "Không mở thành tựu mới" **không chắc** là "bỏ game" (có game rất ít thành tựu, hoặc người chơi đã mở hết) → nêu rõ định nghĩa;
-  có thể loại cặp đã mở hết thành tựu của game.
-- Mẫu là người săn thành tựu → kết luận không áp dụng cho người chơi phổ thông.
+- "Không quay lại" không chắc là "bỏ game" (đã chơi xong, hoặc game rất ít thành tựu) → tách riêng các nhóm này.
+- Cách thiết kế thành tựu khác nhau giữa các nền tảng → so sánh trong cùng nhóm số thành tựu, nêu trong hạn chế.
+- Mẫu là người săn thành tựu → không áp dụng cho người chơi phổ thông.
 
-**Khác với phân tích đã có:** tác giả đo **tỉ lệ hoàn thành** (% thành tựu đạt được) và MAU/WAU. Câu này đo **tốc độ rời bỏ theo
-thời gian** sau khi bắt đầu một game. Vẫn phải khai báo trong README vì cùng chủ đề hành vi người chơi.
+**Giảm tải nếu cần:** chỉ dùng mốc chính N = 30; bỏ phân tích theo thể loại (26% game PS thiếu thông tin thể loại);
+bỏ cohort (vẫn còn D1, D3, D4, D5, D6).
+
+**Khác với phân tích đã có:** tác giả đo tỉ lệ hoàn thành (% thành tựu đạt được) và MAU/WAU. Câu này đo việc **quay lại một game
+theo thời gian** sau khi bắt đầu. Vẫn phải khai báo trong README vì cùng chủ đề hành vi người chơi.
 
 ---
 
 ## 6. Q4 — Review nào sẽ được bình chọn "helpful"? (ML)
 
-**Câu hỏi (nháp):** Ngay khi một review Steam vừa được đăng, có dự đoán được review đó cuối cùng nhận ít nhất một lượt
-"helpful" không? Những đặc điểm nào của review, người viết và game quyết định điều đó?
+**Câu hỏi (nháp):** Ngay khi một review Steam vừa được đăng, có dự đoán được review đó sẽ nhận ít nhất một lượt "helpful"
+không? Ngoài độ dài, những đặc điểm nào của review, người viết và game quyết định điều đó?
 
 > *English draft:* At the moment a Steam review is posted, can we predict whether it will receive at least one "helpful"
-> vote, and which characteristics of the review, its author and the game drive that prediction?
+> vote, and beyond its length, which characteristics of the review, its author and the game drive that prediction?
 
 **Người dùng của dự đoán:** Steam (hoặc một trang tổng hợp review) cần xếp hạng review **mới** khi chưa có lượt bình chọn nào,
 để người mua đọc được review hữu ích sớm hơn.
 
 **Bằng chứng từ dataset:**
-- 1.204.534 review, không trùng `reviewid`, không trùng `(người chơi, game)`; 2.097 review thiếu nội dung.
-- **Target** `helpful > 0`: **34%** dương → mất cân bằng vừa phải; accuracy dễ gây hiểu nhầm (đoán toàn "không" đã đúng 66%).
-- **Hiệu ứng thời gian phơi bày:** tỉ lệ được vote theo năm đăng: 2017 41,6% · 2018 41,1% · 2019–2024 29–34% · 2025 24,5%
-  (mới đăng, chưa kịp được vote) → review càng cũ càng có nhiều thời gian nhận vote.
-- Độ dài: trung vị 9 từ; **32,7%** review có ≤ 3 từ; khoảng 41,5% review không phải văn bản ASCII (nhiều ngôn ngữ).
-- Ghép: 100% tác giả review có trong `players` (thiếu ngày tạo tài khoản 10,3%); 161 game được review không có trong `games`.
+- 1.204.534 review, không trùng `reviewid`; 100% tác giả có trong `players` (thiếu ngày tạo tài khoản 8,7%);
+  51 review có ngày đăng **trước** ngày tạo tài khoản → lỗi dữ liệu, loại.
+- **Target** `helpful > 0`: **34%** dương → accuracy dễ gây hiểu nhầm (đoán toàn "không" đã đúng 66%).
+  `helpful` lớn nhất là 999 nhưng chỉ có 1 dòng → không phải giá trị giữ chỗ.
+- **Tỉ lệ được vote theo năm đăng:** 2010–2012: 10–17% · 2013–2018: 35–42% · 2019–2024: 29–34% · 2025: 24,5%.
+  → trước 2013 khác hẳn (có thể do hệ thống review của Steam khi đó khác); review gần đây chưa đủ thời gian nhận vote.
+- **Độ dài:** trung vị 9 từ; 32,7% review ≤ 3 từ. Tỉ lệ được vote tăng từ 23,5% (≤ 3 từ) lên 65,7% (> 100 từ).
+- **Độ phổ biến của game, ngược chiều:** review của game ít review được vote 55,7%; game nhiều review nhất chỉ 16,9%.
+- **Tuần cuối tháng 11 mỗi năm** (2019–2024) số review tăng gấp 4–5 lần; review tuần đó ngắn hơn (6 so với 9 từ) và
+  ít được vote hơn (22,7% so với 36,1%, đo năm 2023).
+- **Tác giả lặp lại:** 196.698 tác giả, có người viết 14.893 review; với cách chia ở dưới, 74% tác giả trong tập test cũng có
+  trong tập train.
+- **Thử nhanh** (train 2014–2020, test 2021–2022, chỉ dùng feature số): baseline AP 0,31 · chỉ dùng độ dài 0,51 ·
+  HistGradientBoosting đủ feature 0,66 → mô hình học được nhiều hơn "review dài thì được vote".
 
-**Đủ 6 yêu cầu ML của đề:**
+**Đủ 6 yêu cầu ML của đề (phiên bản tối giản):**
 
 | Yêu cầu | Kế hoạch |
 | --- | --- |
-| 1. Bài toán, người dùng, chống leakage | Phân loại nhị phân `helpful > 0` tại thời điểm đăng. **Loại:** `helpful` (chính là target), `funny`, `awards` (bình chọn đến **sau** khi đăng), `purchased_games`, `friends` (ảnh chụp năm 2025, không phải lúc đăng), giá game (chỉ có giá 2024–25). |
-| 2. Chia dữ liệu | **Theo thời gian** theo `posted`: ví dụ train 2018–2022, test 2023. Bỏ 2024–2025 vì chưa đủ thời gian nhận vote (giải thích bằng bảng ở trên). |
-| 3. ≥ 2 mô hình + baseline, `Pipeline` | Baseline: đoán lớp đa số / tỉ lệ dương. Mô hình: Logistic Regression, HistGradientBoosting. Mọi bước (impute, scale, one-hot, TF-IDF nếu dùng) nằm trong `Pipeline` + `ColumnTransformer`. |
-| 4. Tune bằng CV trên train, test một lần, metric có lý do | `TimeSeriesSplit` trên tập train; metric chính **PR-AUC (average precision)**, phụ là F1 tại ngưỡng chọn trên train. |
-| 5. Phân tích lỗi | Theo độ dài review, ngôn ngữ (ASCII/không), độ phổ biến của game, tuổi tài khoản; xem ví dụ dự đoán sai. |
-| 6. Diễn giải, trả lời câu hỏi | Permutation importance trên tập test; trả lời: đặc điểm nào khiến review được bình chọn. |
+| 1. Bài toán, người dùng, chống leakage | Phân loại nhị phân `helpful > 0` tại thời điểm đăng. **Loại:** `helpful` (chính là target), `funny`, `awards` (bình chọn đến **sau** khi đăng), `purchased_games`, `friends` (ảnh chụp năm 2025), giá game (chỉ có giá 2024–25), tổng số review của game trên cả dataset (chứa thông tin tương lai). |
+| 2. Chia dữ liệu | **Theo thời gian** theo `posted`: train 2014–2020, test 2021–2022. Bỏ trước 2014 và từ 2023 (giải thích bằng bảng tỉ lệ theo năm). Báo thêm kết quả trên nhóm **tác giả mới** (không có trong train). |
+| 3. ≥ 2 mô hình + baseline, `Pipeline` | Baseline `DummyClassifier`. Mô hình: `LogisticRegression` (với `StandardScaler` trong `Pipeline`), `HistGradientBoostingClassifier` hoặc `RandomForestClassifier`. |
+| 4. Tune bằng CV trên train, test một lần, metric có lý do | `GridSearchCV` + `TimeSeriesSplit` trên tập train, lưới tham số nhỏ; metric chính **average precision (PR-AUC)**; chạy tập test đúng một lần. |
+| 5. Phân tích lỗi | Theo nhóm độ dài, độ phổ biến của game, năm đăng, tác giả mới / cũ, tuần cuối tháng 11; in vài dòng dự đoán sai. |
+| 6. Diễn giải, trả lời câu hỏi | `permutation_importance` trên một mẫu con của tập test; trả lời: ngoài độ dài, đặc điểm nào quyết định. |
 
-**Feature gợi ý (đều có tại thời điểm đăng):** số từ, số ký tự, có xuống dòng/liên kết, tỉ lệ chữ hoa, ASCII hay không ·
-tuổi tài khoản lúc đăng (`posted − created`) · số review người đó đã viết **trước** đó · số ngày từ khi game phát hành ·
-số review game đó đã có **trước** thời điểm đăng · thể loại game.
+**Feature (đều có tại thời điểm đăng, tính bằng pandas và regex):** số từ, số ký tự, có định dạng (`[h1]`, `[b]`, `[list]`,
+xuống dòng), ASCII hay không · tuổi tài khoản lúc đăng (`posted − created`) · số ngày từ khi game phát hành ·
+số review game đó đã có **trước ngày đăng** · số review tác giả đã viết **trước ngày đăng** · đăng trong tuần cuối tháng 11 hay không.
 
 **Rủi ro và cách xử lý:**
-- Hiệu ứng thời gian phơi bày (ở trên) → chia theo thời gian và giới hạn năm; nêu trong hạn chế.
-- Các feature "trước thời điểm đăng" phải tính chỉ từ dữ liệu quá khứ, nếu không sẽ leakage.
-- Một game có nhiều review ở cả train và test → báo trong phân tích lỗi (game phổ biến có thể làm mô hình "học thuộc").
+- `posted` chỉ có ngày, không có giờ → feature "đã có trước đó" phải đếm **trước ngày đăng**, không đếm review cùng ngày.
+- Hiệu ứng thời gian phơi bày → giới hạn khoảng năm như trên; nêu trong hạn chế.
+- Tác giả xuất hiện ở cả train và test → báo riêng kết quả trên tác giả mới.
+- Permutation importance trên vài trăm nghìn dòng chạy chậm → dùng mẫu con với `random_state=RANDOM_STATE`.
+
+**Giảm tải nếu cần:** không dùng TF-IDF hay xử lý ngôn ngữ; chỉ 2 mô hình; lưới tham số nhỏ. Vẫn đủ 6 yêu cầu.
 
 **Khác với phân tích đã có:** tác giả không phân tích bảng `reviews`.
 
 ---
 
-## 7. Q4' — Dự phòng cho câu ML: đạt Platinum trên PlayStation
+## 7. Các hướng đã thử và lý do không chọn
 
-**Câu hỏi (nháp):** Dựa vào 7 ngày đầu chơi một game PlayStation, có dự đoán được người chơi cuối cùng có đạt trophy Platinum không?
-
-**Bằng chứng:** 25.589 game có Platinum; 863.919 cặp (người chơi, game) trên các game đó; **32,2%** đạt Platinum; mỗi năm
-2019–2024 có 60–89 nghìn cặp mới. Dữ liệu PS ít dấu hiệu mở hàng loạt (1,5%), hợp với feature "tuần đầu".
-
-**Hướng làm:** feature từ 7 ngày đầu (số trophy, tỉ lệ Gold/Silver, số ngày có hoạt động), đặc điểm game (tổng số trophy,
-PS4/PS5), lịch sử người chơi **trước** game đó (tỉ lệ Platinum ở các game trước). Chia theo thời gian bắt đầu chơi hoặc
-`GroupKFold` theo người chơi. Loại mọi thông tin sau ngày thứ 7.
-
-**Vì sao chỉ là dự phòng:** gần với chủ đề **tỉ lệ hoàn thành** mà tác giả đã phân tích → phải khai báo kỹ; và 26% game PS đã
-chơi không có trong `games` nên thiếu thể loại.
-
----
+| Hướng | Kết quả thử trên dữ liệu | Lý do không chọn |
+| --- | --- | --- |
+| Q2 cũ: cùng một game, console đắt hơn PC bao nhiêu | Khớp tên: Steam & PS 5.591, Steam & Xbox 5.425 game; trung vị tỉ lệ giá = 1,00; 52–58% bằng giá tuyệt đối | Giá console lẫn giá đang sale (Battlefield V $1,99 trên PS, Steam $49,99); 682 cặp PS chênh > 3 lần; khớp nhầm tên ("The Door"); không kiểm tra độ vững được vì chỉ 1.149 game PS có giá ở cả 3 ngày |
+| Q4' cũ (ML dự phòng): dự đoán Platinum PS từ 7 ngày đầu | 863.919 cặp, 32,2% đạt Platinum | 55% Platinum đạt được ngay trong 7 ngày đầu → gần như biết trước đáp án; trùng chủ đề tỉ lệ hoàn thành của tác giả |
+| Độ trễ phát hành PC → console | Thoạt nhìn giảm từ khoảng 1 năm (2013–2015) xuống gần 0 (2022–2023) | Do dữ liệu bị cắt cụt (game ra PC gần đây chưa kịp lên console); xử lý xong thì tỉ lệ ra cùng tháng ổn định 40–55% |
+| Bạn bè có thư viện game giống nhau không (Steam) | Jaccard giữa bạn bè 0,074, gấp khoảng 1,9 lần cặp ngẫu nhiên | Đáp án hiển nhiên |
+| Giá theo khu vực (RUB, JPY…) | Game càng đắt thì tỉ lệ RUB/USD càng thấp | Là bảng giá khu vực Valve gợi ý sẵn → hiển nhiên |
+| Bắt đầu chơi sớm sau phát hành thì hoàn thành nhiều hơn (PS) | Tỉ lệ Platinum 36,6% (≤ 30 ngày) → 24,1% (> 3 năm), 610.574 cặp | **Dự phòng cho Q3**: so được trong cùng game (D4 tốt), nhưng gần chủ đề tỉ lệ hoàn thành của tác giả |
 
 ## 8. Việc tiếp theo
 
-- [ ] Hai thành viên đọc file này, chọn giữ / sửa / thay từng câu (ghi lý do vào [`DECISIONS.md`](DECISIONS.md)).
-- [ ] Trong Phase 2, đo lại các số liệu ở trên trong notebook 01 bằng code của nhóm.
-- [ ] Xem tab *Code* của dataset trên Kaggle, đảm bảo không trùng câu hỏi; ghi vào README mục *Related public work*.
+- [ ] Làm xong notebook 01, rồi hai thành viên chọn giữ / sửa / thay từng câu (ghi lý do vào [`DECISIONS.md`](DECISIONS.md)).
 - [ ] Chốt người sở hữu từng câu (mục 1.3).
+- [ ] Xem tab *Code* của dataset trên Kaggle, đảm bảo không trùng câu hỏi; ghi vào README mục *Related public work*.
+- [ ] Trong Phase 2, đo lại các số liệu ở trên trong notebook 01 bằng code của nhóm, đi sâu vào các cột của 4 câu.
+- [ ] Người giữ Q4 bắt đầu học scikit-learn (`Pipeline`, `GridSearchCV`, `TimeSeriesSplit`, `permutation_importance`).
 - [ ] Viết lại câu hỏi bằng lời của nhóm, cập nhật README (tiếng Anh), notebook 02/03 (mục 1–3) và ma trận trong `PROJECT_PLAN.md`.

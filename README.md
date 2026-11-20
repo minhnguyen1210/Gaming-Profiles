@@ -11,8 +11,8 @@ TODO: one-paragraph project summary (written once the questions are fixed).
 
 | Member | Student ID | GitHub |
 | --- | --- | --- |
-| TODO | TODO | TODO |
-| TODO | TODO | TODO |
+| TODO | TODO | [`minhnguyen1210`](https://github.com/minhnguyen1210) |
+| TODO | TODO | [`CaoThien1402`](https://github.com/CaoThien1402) |
 
 ## Question ownership & task breakdown
 
@@ -20,7 +20,9 @@ Each member owns two questions (spec 3.3); at least one question uses a machine 
 
 | Task | Owner | Notebook |
 | --- | --- | --- |
-| Data collection & exploration | TODO | `notebooks/01_collection_exploration.ipynb` |
+| Data collection | both | `notebooks/01_collection_exploration.ipynb` |
+| Data exploration: game tables (`games`, `achievements`, `prices`) | `minhnguyen1210` | `notebooks/01_collection_exploration.ipynb` |
+| Data exploration: player tables (`players`, `history`, `purchased_games`, `reviews`, `friends`, `private_steamids`) | `CaoThien1402` | `notebooks/01_collection_exploration.ipynb` |
 | Q1 (non-ML) | TODO | `notebooks/02_analysis_q1.ipynb` |
 | Q2 (non-ML) | TODO | `notebooks/02_analysis_q2.ipynb` |
 | Q3 (non-ML) | TODO | `notebooks/02_analysis_q3.ipynb` |
@@ -179,6 +181,6 @@ the work they own, and no data files are committed.
 └── src/
     ├── __init__.py
     ├── config.py                # paths, platforms, table names, RANDOM_STATE
-    ├── data_loading.py          # load_table / load_all
+    ├── data_loading.py          # load_table / load_all; load_player_table and helpers for list columns
     └── utils.py                 # report_rows: row count after each step that changes the data
 ```

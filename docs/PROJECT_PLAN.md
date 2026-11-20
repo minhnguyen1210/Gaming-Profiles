@@ -26,8 +26,8 @@ mỗi người tự commit phần mình, và phải giải thích được **m�
 | --- | --- | --- | --- | --- | --- |
 | 0 | Setup repo, môi trường, dữ liệu | 4 | A (B review) | repo chạy được trên cả 2 máy | TODO |
 | 1 | Thu thập dữ liệu (mô tả nguồn) | 3.1 | A + B | notebook 01 – mục 1 | TODO |
-| 2 | Khám phá dữ liệu | 3.2 | A + B (chia theo bảng) | notebook 01 – mục 2, 3 | TODO |
-| 3 | Đặt câu hỏi | 3.3 | A + B | bảng câu hỏi trong README | TODO |
+| 2 | Khám phá dữ liệu | 3.2 | A: phía game · B: phía người chơi | notebook 01 – mục 2, 3 | TODO |
+| 3 | Đặt câu hỏi (sau khi xong notebook 01) | 3.3 | A + B | bảng câu hỏi trong README | TODO |
 | 4 | Phân tích (4 câu) | 3.4 | mỗi người 2 câu | notebook 02_q1–q3, 03 | TODO |
 | 5 | Tổng kết & reflection | 3.5 | A + B | notebook 04, README | TODO |
 | 6 | Slides & tập thuyết trình | 5 | A + B | `slides.pdf` | TODO |
@@ -35,9 +35,10 @@ mỗi người tự commit phần mình, và phải giải thích được **m�
 
 Phase 2–4 có tính lặp: hiểu dữ liệu hơn thì quay lại sửa phase trước (3).
 
-## 4. Phân công câu hỏi (đề xuất — nhóm chốt ở Phase 3)
+## 4. Phân công câu hỏi (chọn ở Phase 3, sau khi xong notebook 01)
 
 Nhóm 2 người → **4 câu hỏi**, mỗi người sở hữu đúng 2 câu, **ít nhất 1 câu ML** (3.3).
+Các câu ứng viên và bằng chứng (chưa chốt): [`QUESTIONS.md`](QUESTIONS.md).
 
 | Câu | Loại | Notebook | Người sở hữu |
 | --- | --- | --- | --- |
@@ -66,13 +67,13 @@ cả 3 câu non-ML gộp lại ≥ 4/6 tiêu chí.
 | Việc | Ai | Xong khi | Trạng thái |
 | --- | --- | --- | --- |
 | Cấu trúc repo đúng mục 4 của đề | A | có đủ `README.md`, `environment.yml`, `LLM_USAGE.md`, `data/`, `src/`, `notebooks/` | ✅ |
-| `environment.yml` tái lập được | A | `conda env create -f environment.yml` chạy được trên máy A và B | ✅ máy A · ⏳ máy B |
+| `environment.yml` tái lập được | A | `conda env create -f environment.yml` chạy được trên máy A và B | ✅ (B chạy notebook 01 bằng kernel `gaming-ds` trong PR #1) |
 | Script tải dữ liệu | A | `bash scripts/download_data.sh` đưa đủ 21 file (phiên bản 1) vào `data/raw/<platform>/` | ✅ |
 | `.gitignore` chặn dữ liệu | A | `git status` không bao giờ hiện file trong `data/raw/` | ✅ |
 | Quy trình nhóm: `CONTRIBUTING.md`, kế hoạch, nhật ký quyết định, template PR/issue, hook chặn AI | A | cả hai đã đọc và đồng ý | ⏳ B đọc và đồng ý |
-| Commit đầu tiên + push | A | `main` trên GitHub có commit `setup: ...` | ⏳ |
-| Bảo vệ nhánh `main` trên GitHub | A | làm theo `CONTRIBUTING.md` mục 8 | ⏳ |
-| B chấp nhận lời mời repo, clone, setup theo `CONTRIBUTING.md` mục 3 | B | B chạy ô setup của notebook 01 không lỗi | ⏳ |
+| Commit đầu tiên + push | A | `main` trên GitHub có commit `setup: ...` | ✅ |
+| Bảo vệ nhánh `main` trên GitHub | A | làm theo `CONTRIBUTING.md` mục 8 | ⏳ (2026-11-20: `main` chưa có ruleset) |
+| B chấp nhận lời mời repo, clone, setup theo `CONTRIBUTING.md` mục 3 | B | B chạy ô setup của notebook 01 không lỗi | ✅ (PR #1) |
 | Điền tên, MSSV vào README và mục 2 của file này | A, B | không còn TODO ở bảng thành viên | ⏳ |
 
 ### Phase 1 — Thu thập dữ liệu (3.1) → notebook 01, mục 1
@@ -91,12 +92,12 @@ Trả lời **bằng lời của nhóm** trong notebook:
 
 Nguyên tắc của đề: **đi sâu vào cột liên quan tới câu hỏi**, các cột khác tóm tắt ngắn, **không vẽ mỗi cột một biểu đồ**.
 
-Chia theo nhóm bảng để làm song song (mỗi người viết phần bảng của mình trong notebook 01):
+Chia theo nhóm bảng để làm song song (mỗi người viết phần bảng của mình trong notebook 01; [`DECISIONS.md`](DECISIONS.md) #6):
 
-| Nhóm bảng | Bảng | Người |
-| --- | --- | --- |
-| Phía game | `games`, `achievements`, `prices` (3 nền tảng) | TODO |
-| Phía người chơi | `players`, `history`, `purchased_games` (3 nền tảng); `reviews`, `friends`, `private_steamids` (Steam) | TODO |
+| Nhóm bảng | Bảng | Người | Đã xong |
+| --- | --- | --- | --- |
+| Phía game | `games`, `achievements`, `prices` (3 nền tảng) | A | — |
+| Phía người chơi | `players`, `history`, `purchased_games` (3 nền tảng); `reviews`, `friends`, `private_steamids` (Steam) | B | mục 2.1 Loading strategy (PR #1) |
 
 Checklist cho mỗi bảng được dùng:
 
