@@ -28,7 +28,7 @@ Nhóm 2 người → **đúng 4 câu**: **3 câu non-ML + 1 câu ML** (đề, m�
 | Q1 | non-ML | Đợt sale Steam: giảm sâu tới đâu, sau sale giá có tăng lên không | Steam `prices`, `games` | `02_analysis_q1.ipynb` | TODO |
 | Q2 | non-ML | Hạng trophy PlayStation có phản ánh độ khó thật không | PS `history`, `achievements` | `02_analysis_q2.ipynb` | TODO |
 | Q3 | non-ML | Sau thành tựu đầu tiên, người chơi có quay lại game không | `history`, `achievements` cả 3 nền tảng | `02_analysis_q3.ipynb` | TODO |
-| Q4 | ML | Dự đoán review Steam có được bình chọn "helpful" không | Steam `reviews`, `players`, `games` | `03_ml_question.ipynb` | TODO |
+| Q4 | ML | Dự đoán review Steam có được ≥ 2 vote "helpful" không | Steam `reviews`, `players`, `games` | `03_ml_question.ipynb` | TODO |
 
 ### 1.2 Ma trận tiêu chí độ sâu (dự kiến)
 
@@ -262,11 +262,17 @@ theo thời gian** sau khi bắt đầu. Vẫn phải khai báo trong README vì
 
 ## 6. Q4 — Review nào sẽ được bình chọn "helpful"? (ML)
 
-**Câu hỏi (nháp):** Ngay khi một review Steam vừa được đăng, có dự đoán được review đó sẽ nhận ít nhất một lượt "helpful"
+**Câu hỏi (nháp):** Ngay khi một review Steam vừa được đăng, có dự đoán được review đó sẽ nhận **ít nhất hai** lượt "helpful"
 không? Ngoài độ dài, những đặc điểm nào của review, người viết và game quyết định điều đó?
 
-> *English draft:* At the moment a Steam review is posted, can we predict whether it will receive at least one "helpful"
-> vote, and beyond its length, which characteristics of the review, its author and the game drive that prediction?
+> *English draft:* At the moment a Steam review is posted, can we predict whether it will receive at least two "helpful"
+> votes, and beyond its length, which characteristics of the review, its author and the game drive that prediction?
+
+> **Vì sao là "ít nhất hai" (cập nhật 2026-11-21):** script thu thập của tác giả đọc số vote bằng mẫu
+> "N people found this review helpful". Steam viết một vote là "1 person", nên review có đúng 1 vote bị ghi thành 0:
+> dữ liệu có **0** review `helpful = 1` nhưng 98.268 review `helpful = 2`. Do đó `helpful > 0` thực chất nghĩa là
+> **≥ 2 vote**, và nhóm "0" gồm cả review có 0 vote lẫn review có 1 vote. Phải ghi rõ định nghĩa này trong notebook
+> (xem notebook 01, mục 1.4, hạn chế 4).
 
 **Người dùng của dự đoán:** Steam (hoặc một trang tổng hợp review) cần xếp hạng review **mới** khi chưa có lượt bình chọn nào,
 để người mua đọc được review hữu ích sớm hơn.
@@ -274,8 +280,12 @@ không? Ngoài độ dài, những đặc điểm nào của review, người vi
 **Bằng chứng từ dataset:**
 - 1.204.534 review, không trùng `reviewid`; 100% tác giả có trong `players` (thiếu ngày tạo tài khoản 8,7%);
   51 review có ngày đăng **trước** ngày tạo tài khoản → lỗi dữ liệu, loại.
-- **Target** `helpful > 0`: **34%** dương → accuracy dễ gây hiểu nhầm (đoán toàn "không" đã đúng 66%).
-  `helpful` lớn nhất là 999 nhưng chỉ có 1 dòng → không phải giá trị giữ chỗ.
+- **Target** `helpful > 0` (= ≥ 2 vote, xem ở trên): **34%** dương → accuracy dễ gây hiểu nhầm (đoán toàn "không" đã đúng 66%).
+- **Lỗi do cách thu thập** (đọc từ script của tác giả, kiểm chứng trên dữ liệu):
+  - số vote có dấu phẩy hàng nghìn chỉ giữ 3 chữ số cuối ("1,234" → 234, "1,000" → 0), nên `helpful` không bao giờ vượt 999;
+    review có đúng 1.000, 2.000… vote bị ghi thành 0 (rất hiếm, không đổi được nhãn của phần lớn dữ liệu);
+  - `posted` là ngày **sửa lần cuối** nếu review đã được sửa, nên "thời điểm đăng" có thể muộn hơn thực tế;
+  - chỉ có review của game nằm trong CSDL của tác giả, và tác giả review là người chơi lấy bằng snowball qua danh sách bạn bè.
 - **Tỉ lệ được vote theo năm đăng:** 2010–2012: 10–17% · 2013–2018: 35–42% · 2019–2024: 29–34% · 2025: 24,5%.
   → trước 2013 khác hẳn (có thể do hệ thống review của Steam khi đó khác); review gần đây chưa đủ thời gian nhận vote.
 - **Độ dài:** trung vị 9 từ; 32,7% review ≤ 3 từ. Tỉ lệ được vote tăng từ 23,5% (≤ 3 từ) lên 65,7% (> 100 từ).
@@ -291,7 +301,7 @@ không? Ngoài độ dài, những đặc điểm nào của review, người vi
 
 | Yêu cầu | Kế hoạch |
 | --- | --- |
-| 1. Bài toán, người dùng, chống leakage | Phân loại nhị phân `helpful > 0` tại thời điểm đăng. **Loại:** `helpful` (chính là target), `funny`, `awards` (bình chọn đến **sau** khi đăng), `purchased_games`, `friends` (ảnh chụp năm 2025), giá game (chỉ có giá 2024–25), tổng số review của game trên cả dataset (chứa thông tin tương lai). |
+| 1. Bài toán, người dùng, chống leakage | Phân loại nhị phân `helpful > 0` (= ≥ 2 vote) tại thời điểm đăng. **Loại:** `helpful` (chính là target), `funny`, `awards` (bình chọn đến **sau** khi đăng), `purchased_games`, `friends` (ảnh chụp năm 2025), giá game (chỉ có giá 2024–25), tổng số review của game trên cả dataset (chứa thông tin tương lai). |
 | 2. Chia dữ liệu | **Theo thời gian** theo `posted`: train 2014–2020, test 2021–2022. Bỏ trước 2014 và từ 2023 (giải thích bằng bảng tỉ lệ theo năm). Báo thêm kết quả trên nhóm **tác giả mới** (không có trong train). |
 | 3. ≥ 2 mô hình + baseline, `Pipeline` | Baseline `DummyClassifier`. Mô hình: `LogisticRegression` (với `StandardScaler` trong `Pipeline`), `HistGradientBoostingClassifier` hoặc `RandomForestClassifier`. |
 | 4. Tune bằng CV trên train, test một lần, metric có lý do | `GridSearchCV` + `TimeSeriesSplit` trên tập train, lưới tham số nhỏ; metric chính **average precision (PR-AUC)**; chạy tập test đúng một lần. |
@@ -304,6 +314,9 @@ số review game đó đã có **trước ngày đăng** · số review tác gi�
 
 **Rủi ro và cách xử lý:**
 - `posted` chỉ có ngày, không có giờ → feature "đã có trước đó" phải đếm **trước ngày đăng**, không đếm review cùng ngày.
+- `posted` có thể là ngày sửa → một số review bị xếp vào năm muộn hơn; không tách được trong dữ liệu, nêu trong hạn chế.
+- Nhãn bị ảnh hưởng bởi lỗi đọc số vote → định nghĩa target là "≥ 2 vote" ngay từ đầu; khi phân tích lỗi, nhớ rằng nhóm "0"
+  có lẫn review có 1 vote.
 - Hiệu ứng thời gian phơi bày → giới hạn khoảng năm như trên; nêu trong hạn chế.
 - Tác giả xuất hiện ở cả train và test → báo riêng kết quả trên tác giả mới.
 - Permutation importance trên vài trăm nghìn dòng chạy chậm → dùng mẫu con với `random_state=RANDOM_STATE`.
