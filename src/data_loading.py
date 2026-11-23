@@ -1,4 +1,6 @@
 """Loaders for the raw tables in ``data/raw``."""
+import ast
+
 import pandas as pd
 
 from src.config import PLATFORMS, RAW_DIR, TABLES
@@ -135,3 +137,72 @@ def parse_id_list(text) -> list:
     if not isinstance(text, str) or text == "[]":
         return []
     return [item.strip().strip("'\"") for item in text.strip("[]").split(",")]
+
+
+# --- Game-side tables -----------------------------------------------------------------------------------------
+# Read arguments for the game-side tables (see notebook 01, section 2.1).
+# - Game ids are at most about 3.4 million on every platform, so they fit int32.
+# - achievementid is read as "string", the same dtype as history.achievementid, so the two tables join directly.
+# - achievements: only an empty cell means "missing". By default pandas also turns achievement titles such as
+#   "NA", "NULL" or "null" into NaN (19 titles and descriptions across the three platforms).
+# - Prices stay float64: float32 would store 4.99 as 4.9899998 and make price comparisons unreliable.
+# - The default C parser is used everywhere: the pyarrow engine fails on PlayStation achievements, whose
+#   descriptions contain line breaks inside quoted cells.
+_GAMES_ARGS = {"dtype": {"gameid": "int32"}, "parse_dates": ["release_date"]}
+_ACHIEVEMENTS_DTYPES = {"achievementid": "string", "gameid": "int32"}
+_PRICES_ARGS = {"dtype": {"gameid": "int32"}, "parse_dates": ["date_acquired"]}
+
+# PlayStation trophy grades in their real order (alphabetical order would put Gold before Silver)
+TROPHY_GRADES = pd.CategoricalDtype(["Bronze", "Silver", "Gold", "Platinum"], ordered=True)
+
+GAME_READ_ARGS = {
+    ("steam", "games"): _GAMES_ARGS,
+    ("playstation", "games"): {**_GAMES_ARGS, "dtype": {"gameid": "int32", "platform": "category"}},
+    ("xbox", "games"): _GAMES_ARGS,
+    ("steam", "achievements"): {"dtype": _ACHIEVEMENTS_DTYPES, **_ONLY_EMPTY_IS_NA},
+    ("playstation", "achievements"): {"dtype": {**_ACHIEVEMENTS_DTYPES, "rarity": TROPHY_GRADES}, **_ONLY_EMPTY_IS_NA},
+    # Xbox points are whole numbers with a few missing values: nullable Int16 keeps them as integers
+    ("xbox", "achievements"): {"dtype": {**_ACHIEVEMENTS_DTYPES, "points": "Int16"}, **_ONLY_EMPTY_IS_NA},
+    ("steam", "prices"): _PRICES_ARGS,
+    ("playstation", "prices"): _PRICES_ARGS,
+    ("xbox", "prices"): _PRICES_ARGS,
+}
+
+GAME_SIDE_TABLES = list(GAME_READ_ARGS)
+
+# Columns of the games tables that store a list as text, e.g. "['Action', 'Indie']"
+GAME_LIST_COLUMNS = ["developers", "publishers", "genres", "supported_languages"]
+
+
+def load_game_table(platform: str, name: str, **overrides) -> pd.DataFrame:
+    """Load one game-side table with the settings in ``GAME_READ_ARGS``.
+
+    Parameters
+    ----------
+    platform, name : str
+        Must be a key of ``GAME_READ_ARGS``, e.g. ``("steam", "prices")``.
+    **overrides
+        Replace or add ``pandas.read_csv`` arguments, e.g. ``usecols`` or ``nrows``. When ``usecols``
+        leaves out a date column, also pass ``parse_dates=None``.
+
+    Returns
+    -------
+    pandas.DataFrame
+        The table with compact dtypes and parsed dates. List columns (``GAME_LIST_COLUMNS``) are still
+        text; convert them with ``parse_list_column``.
+    """
+    if (platform, name) not in GAME_READ_ARGS:
+        raise ValueError(f"No game-side settings for ({platform!r}, {name!r}); expected one of {GAME_SIDE_TABLES}")
+    return load_table(platform, name, **{**GAME_READ_ARGS[(platform, name)], **overrides})
+
+
+def parse_list_column(series: pd.Series) -> pd.Series:
+    """Turn a column of lists stored as text into Python lists, keeping missing cells as ``NaN``.
+
+    Uses ``ast.literal_eval``, which reads the text as a Python literal. Unlike counting commas
+    (``count_list_items``), it handles names that contain a comma, such as ``"TALESSHOP Co., Ltd."``.
+
+    >>> parse_list_column(pd.Series(["['Action', 'Indie']", "['TALESSHOP Co., Ltd.']", float("nan")])).tolist()
+    [['Action', 'Indie'], ['TALESSHOP Co., Ltd.'], nan]
+    """
+    return series.map(ast.literal_eval, na_action="ignore")
