@@ -55,7 +55,7 @@ Each platform has six tables; Steam has three more.
 | `prices` | the price of a game on one date (USD, EUR, GBP, JPY, RUB) | all |
 | `reviews` | a user review of a game | Steam |
 | `friends` | a player and their list of friends | Steam |
-| `private_steamids` | a Steam id whose profile is private | Steam |
+| `private_steamids` | a Steam player for whom no review was collected (private profile or no review written; see notebook 01, section 1.4) | Steam |
 
 TODO (team): known limitations and biases, in our own words (see notebook 01, section 1.4).
 
@@ -181,6 +181,6 @@ the work they own, and no data files are committed.
 └── src/
     ├── __init__.py
     ├── config.py                # paths, platforms, table names, RANDOM_STATE
-    ├── data_loading.py          # load_table / load_all; load_player_table and helpers for list columns
+    ├── data_loading.py          # load_table / load_all; load_game_table, load_player_table and list-column helpers
     └── utils.py                 # report_rows: row count after each step that changes the data
 ```
